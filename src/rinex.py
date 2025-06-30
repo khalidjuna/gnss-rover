@@ -27,15 +27,12 @@ import time
 # },name="secondary")
 
 # Cholid
-cred_ta = credentials.Certificate(
-    "/home/ronny/asset/ppls-app.json"
-)
+cred_ta = credentials.Certificate('/home/ronny/asset/ppls-app.json')
 shift_app = firebase_admin.initialize_app(
     cred_ta,
     {
-        "databaseURL": "https://ppls-app-default-rtdb.firebaseio.com/"  # Replace with your database URL
-    },
-)
+        'databaseURL': 'https://ppls-app-default-rtdb.firebaseio.com/'  # Replace with your database URL
+    })
 
 # Configuration parameters
 device_port = "/dev/ttyGPS"  # Update this to the correct port for your ZED-F9P
@@ -127,7 +124,12 @@ def run_rtkrcv():
         if run_status_rcv == 1:
             time.sleep(5)
             print("Starting RTKRCV...")
-            rtkrcv_command = ["rtkrcv", "-o", "/home/ronny/gnss-rover/ntrip1.conf", "-s"]
+            rtkrcv_command = [
+                "rtkrcv",
+                "-o",
+                "/home/ronny/gnss-rover/ntrip1.conf",
+                "-s",
+            ]
             try:
                 subprocess.run(rtkrcv_command, check=True, timeout=duration)
                 print(f"RTKRCV collected in file: {output_raw_file}")
@@ -267,7 +269,8 @@ def get_access_and_refresh_token(auth_code, redirect_uri, app_key, app_secret):
         print("Failed to get tokens:", response.json())
         return None, None
 
-#dihilangkan
+
+# dihilangkan
 def get_access_token_from_refresh_token(refresh_token, app_key, app_secret):
     # Dropbox OAuth 2.0 token URL
     token_url = "https://api.dropbox.com/oauth2/token"
@@ -463,17 +466,20 @@ def start_rover():
                 "/home/ronny/gnss-rover/solution1.pos",
             )
             shutil.copy(
-                "/home/ronny/gnss-rover/output.obs", "/home/ronny/gnss-rover/output1.obs"
+                "/home/ronny/gnss-rover/output.obs",
+                "/home/ronny/gnss-rover/output1.obs",
             )
             shutil.copy(
-                "/home/ronny/gnss-rover/output.nav", "/home/ronny/gnss-rover/output1.nav"
+                "/home/ronny/gnss-rover/output.nav",
+                "/home/ronny/gnss-rover/output1.nav",
             )
             shutil.copy(
                 "/home/ronny/gnss-rover/solution.pos",
                 f"/home/ronny/gps-record/{filename_pos}",
             )
             shutil.copy(
-                "/home/ronny/gnss-rover/output.obs", f"/home/ronny/gps-record/{filename}"
+                "/home/ronny/gnss-rover/output.obs",
+                f"/home/ronny/gps-record/{filename}",
             )
             shutil.copy(
                 "/home/ronny/gnss-rover/output.nav",
