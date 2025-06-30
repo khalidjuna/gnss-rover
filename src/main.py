@@ -94,7 +94,7 @@ def run_rtkrcv():
     run_status_rcv = 0
     while True:
         ref = db.reference('Realtime')
-        data = ref.child("rover2").get()
+        data = ref.child("rover").get()
         interval = data['Interval']
         duration = (60*(interval-1))  # Time in seconds
         # print(duration)
@@ -263,7 +263,7 @@ def upload_data_post():
     e2 = 0.00669437999014  # Earth's first eccentricity squared (WGS84)
     try:
         ref = db.reference('Realtime')
-        data = ref.child("rover2").get()
+        data = ref.child("rover").get()
         index = data['index']
         ref = db.reference(f"Patok/{index}")
         data = ref.child("Realtime").get()
@@ -339,7 +339,7 @@ def start_rover():
     local_file_path_pos = "/home/ronny/gnss-rover/solution1.pos" # Path to your local .txt file
     local_file_path_pos_post = "/home/ronny/gnss-rover/solution_post.pos" # Path to your local .txt file
     local_file_path_base = "/home/ronny/gnss-rover/base.obs" # Path to your local .txt file
-    ref_status = db.reference(f"/Realtime/rover2/")
+    ref_status = db.reference(f"/Realtime/rover/")
     ref = db.reference(f"/Realtime/base/")
     data = {
         f"request": 1
@@ -347,7 +347,7 @@ def start_rover():
     ref.update(data)
     while True:
         ref = db.reference("/Realtime")
-        data = ref.child("rover2").get()
+        data = ref.child("rover").get()
         mode = f"{data['mode']}"
         now = datetime.now()
         minute = now.strftime("%M")
@@ -372,7 +372,7 @@ def start_rover():
             ref_status.update(data_status)
             run_status = 0
             ref = db.reference("/Realtime")
-            data = ref.child("rover2").get()
+            data = ref.child("rover").get()
             index = data['index']
             interval = data['Interval']
             base_point = data['base']
@@ -499,7 +499,7 @@ def start_realtime():
             time.sleep(10)
             last_line = read_last_line(file_path)
             ref = db.reference('Realtime')
-            data = ref.child("rover2").get()
+            data = ref.child("rover").get()
             index = data['index']
             #print(index)
             if 'GPST' in last_line or '%' in last_line or len(last_line) <=2:
@@ -521,7 +521,7 @@ def start_realtime():
                     "qua": q,
                     "ns": ns
                 }
-                ref = db.reference("/Realtime/rover2")
+                ref = db.reference("/Realtime/rover")
                 ref.update(data)
                 if q < 3:
                     if startup_flag == 0:
@@ -573,7 +573,7 @@ def start_gui():
         while True:
             try:
                 ref = db.reference('Realtime')
-                data = ref.child("rover2").get()
+                data = ref.child("rover").get()
                 if data:
                     latitude = float(data.get('lat', 0))
                     longitude = float(data.get('long', 0))
