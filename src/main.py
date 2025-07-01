@@ -179,55 +179,55 @@ def upload_file_to_dropbox(file_path, dropbox_path,access_token):
             time.sleep(2)
             print(f"fail {i}")
             
-def get_access_and_refresh_token(auth_code, redirect_uri, app_key, app_secret):
-    token_url = "https://api.dropbox.com/oauth2/token"
-    response = requests.post(
-        token_url,
-        data={
-            "code": auth_code,
-            "grant_type": "authorization_code",
-            "redirect_uri": redirect_uri
-        },
-        auth=(app_key, app_secret)
-    )
+# def get_access_and_refresh_token(auth_code, redirect_uri, app_key, app_secret):
+#     token_url = "https://api.dropbox.com/oauth2/token"
+#     response = requests.post(
+#         token_url,
+#         data={
+#             "code": auth_code,
+#             "grant_type": "authorization_code",
+#             "redirect_uri": redirect_uri
+#         },
+#         auth=(app_key, app_secret)
+#     )
     
-    if response.status_code == 200:
-        tokens = response.json()
-        access_token = tokens.get("access_token")
-        refresh_token = tokens.get("refresh_token")
-        print("Access token:", access_token)
-        print("Refresh token:", refresh_token)
-        return access_token, refresh_token
-    else:
-        print("Failed to get tokens:", response.json())
-        return None, None
+#     if response.status_code == 200:
+#         tokens = response.json()
+#         access_token = tokens.get("access_token")
+#         refresh_token = tokens.get("refresh_token")
+#         print("Access token:", access_token)
+#         print("Refresh token:", refresh_token)
+#         return access_token, refresh_token
+#     else:
+#         print("Failed to get tokens:", response.json())
+#         return None, None
     
-def get_access_token_from_refresh_token(refresh_token, app_key, app_secret):
-    # Dropbox OAuth 2.0 token URL
-    token_url = "https://api.dropbox.com/oauth2/token"
+# def get_access_token_from_refresh_token(refresh_token, app_key, app_secret):
+#     # Dropbox OAuth 2.0 token URL
+#     token_url = "https://api.dropbox.com/oauth2/token"
     
-    # Send a POST request to get a new access token
-    response = requests.post(
-        token_url,
-        data={
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token
-        },
-        auth=(app_key, app_secret)  # Use app credentials for basic auth
-    )
+#     # Send a POST request to get a new access token
+#     response = requests.post(
+#         token_url,
+#         data={
+#             "grant_type": "refresh_token",
+#             "refresh_token": refresh_token
+#         },
+#         auth=(app_key, app_secret)  # Use app credentials for basic auth
+#     )
     
-    if response.status_code == 200:
-        access_token = response.json().get("access_token")
-        print("New Access Token:", access_token)
-        return access_token
-    else:
-        print("Failed to refresh access token:", response.json())
-        return None
+#     if response.status_code == 200:
+#         access_token = response.json().get("access_token")
+#         print("New Access Token:", access_token)
+#         return access_token
+#     else:
+#         print("Failed to refresh access token:", response.json())
+#         return None
     
-def download_file_from_dropbox(LOCAL_FILE_PATH,DROPBOX_FILE_PATH,new_access_token):
+def download_file_from_dropbox(LOCAL_FILE_PATH,DROPBOX_FILE_PATH,access_token):
     try:
         # Connect to Dropbox
-        dbx = dropbox.Dropbox(new_access_token)
+        dbx = dropbox.Dropbox(access_token)
 
         # Check if the file already exists locally and delete it
         if os.path.exists(LOCAL_FILE_PATH):
