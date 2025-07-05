@@ -31,7 +31,7 @@ output_raw_file = "/home/ronny/gnss-rover/output.ubx"  # Temporary raw file
 output_rinex_file = "/home/ronny/gnss-rover/output.obs"    # Final RINEX observation file
 output_rinex_file_nav = "/home/ronny/gnss-rover/output.nav"    # Final RINEX observation file
 output_folder = "/home/ronny/gps-record"
-tcp_port = 8002
+tcp_port = 9000
 # DROPBOX PARAMS
 auth_code = "tydj37Ufg54AAAAAAAAAf8-wu05VAM_49_4-jKINzi8"
 redirect_uri = "http://localhost:8081/"
@@ -58,10 +58,9 @@ def collect_raw_data(duration):
     Collect raw GNSS data from ZED-F9P using RTKLIB's str2str.
     """
     print("Collecting raw data from ZED-F9P...")
-    serial_port = "/dev/ttyGPS"
     str2str_command = [
         f"str2str",
-        "-in", f"serial://{serial_port}:115200:8:n:1",
+        "-in", f"serial:///ttyGPS:115200:8:n:1",
         "-out", f"tcpsvr://:{tcp_port}",
         "-out", f"file://{output_raw_file}",
         "-msg", "1003,1004,1011,1012,1019,1020,1045,1044,1046,1074,1084,1094,1124,1077,1087,1097,1127"
