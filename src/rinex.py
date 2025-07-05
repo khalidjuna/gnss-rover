@@ -18,17 +18,6 @@ import time
 # Gunakan Access Token Dropbox yang sudah Anda miliki
 access_token = "sl.u.AF39ujNQ2-7XwQjo5VYQiVlC56i4urIO6iF0SQ3zQd7578Ub1cWz6SuXfGtN1DICaDQ4GE_18_J31pD4lT1h4UBsRlBu35mCeMrBqBMq1kwTS3NDyfZQ8c9Jyh7_itcoscskjNltwkY9xeeOSKt-wXVohLyXepryyPEmC9KFQvtDlRzeXyPd8AkdLdbIyUhr6u2ldPPEkIAI4xuhk19JlP1C4wGe9gh_Ew6WHPd9aQEqNEqmx_-ntEIvc3D0sxb0uFs0xqLy2COUl8iBdZeLXty--WFdbppcVMT9N6sUq3PHJ-YZB7lD4L9hIlBPsSbeNiJ56tJIEiaguiLUIIhgk1jV4jE7AyE2tohpy441U3FLGovwx3CTnvsi7NILfTeslXC0wWhJmNcK5irILuDcWH38udYiGGwSxCt0YP8XCFYXvOyTGZ9fbCcC3iwFGB5m2PvVaoCbSXwJxiVlgfAJrVEdEJXPJ0Q2dKTTRwDyEy-B-ofeNbv7clXZoj6ydRXZ9ntO4ROUV-UNEWWv6M1qoxHIGq0pCh_L_T7urd_UAZ1_KAi-w114VssWDL2SsdtP4kBeyDfDm88ubxBvUryZZZ7PD7K_4DmBhujTHyX_JxLi-_4yuwGiemkAMIv1ZKnMcCuaZG_5xLaAzfNpZrUUE4kaVOCQm0h8NNuRw4dhncmdWkTqpsqPzKUe1gMu-HBo12vc7OlLsCYj4MH5Gn3Gfxan6dRk5g8o5B4CpAnYDoUuWqGEMkhJIuf9nnRKzxVgqpKT4fhwVgumGbYzSbeqs2D4QDx3R10ZHBhm2XNIlDfOOUN_OKIyTzbXfB1k6wKGrJBFSD8fRB9aPF7RIwWHUXLfBCouB8JgJzn8YrmBzUJOyaFONplbqBxy1Sh9Qj1UFVap5vlwQvwPS94oaDLWFfRp03jEV_rD8SxHOx957TuXyUCPQ58puomuh_jYEBOl06wsK2G9wOcqY6LgfrDI4boGiPGX8eQ2tgaE2z-vntLfmJJC6RusenPHMeZRXdcRg4I1pGWM2SGQGLkhgIiOEVOf5sV0af6C4K8ZYJ4eGnFKcbW21dbFW657A3WLD_zG27e_hH1F0LpiKqpnD4YbWzQR2D-Ez7M3lm-U9XK0UYGAES4HiSWhECAYDYYCmpCPfq43xyBPiFKMBtpX4doC9qrO57UEXQbSuvXIaZxMmZoQToDWOSV0EpWC8LJwjks9PhhwOdr8jU5dD7zzfWMFUUhHFpNUGrt2LB2MlQ1JTFKYYLudWf1pnWqjD-ryHUF81UCIbHuO-SVX8XvCkkuAni_O5x-C04YlXBio3a-fePHEm9XJJP_NcSwoYzvYmfJff3lmFxQLIoXkHMjgF590qdk7VJr--fcXZPpAmZu6Rb7656MQ1N2AYRa66rrLawaqGjVmfLBQ4bmi0OeaSktFqqQt"
 
-#Septy
-# cred = credentials.Certificate('/home/ronny/gps-rover/asset/tesis-septy-firebase-adminsdk-fbsvc-450124015e.json')
-# firebase_admin.initialize_app(cred, {
-#     'databaseURL': 'https://tesis-septy-default-rtdb.asia-southeast1.firebasedatabase.app/'  # Replace with your database URL
-# })
-# #PPLS
-# cred_ppls = credentials.Certificate('/home/ronny/gps-rover/asset/ppls-shift-firebase-adminsdk-61y26-a26269269d.json')
-# ppls_app = firebase_admin.initialize_app(cred_ppls, {
-#     'databaseURL': 'https://ppls-shift-default-rtdb.asia-southeast1.firebasedatabase.app/'  # Replace with your database URL
-# },name="secondary")
-
 #Cholid
 cred_ppls = credentials.Certificate('/home/ronny/asset/ppls-app.json')
 ppls_app = firebase_admin.initialize_app(cred_ppls, {
@@ -43,7 +32,6 @@ output_rinex_file = "/home/ronny/gnss-rover/output.obs"    # Final RINEX observa
 output_rinex_file_nav = "/home/ronny/gnss-rover/output.nav"    # Final RINEX observation file
 output_folder = "/home/ronny/gps-record"
 tcp_port = 9000
-
 # DROPBOX PARAMS
 auth_code = "tydj37Ufg54AAAAAAAAAf8-wu05VAM_49_4-jKINzi8"
 redirect_uri = "http://localhost:8081/"
@@ -190,9 +178,9 @@ def upload_file_to_dropbox(file_path, dropbox_path,access_token):
         except Exception as e:
             time.sleep(2)
             print(f"fail {i}")
-            
 def get_access_and_refresh_token(auth_code, redirect_uri, app_key, app_secret):
     token_url = "https://api.dropbox.com/oauth2/token"
+    
     response = requests.post(
         token_url,
         data={
@@ -213,7 +201,6 @@ def get_access_and_refresh_token(auth_code, redirect_uri, app_key, app_secret):
     else:
         print("Failed to get tokens:", response.json())
         return None, None
-    
 def get_access_token_from_refresh_token(refresh_token, app_key, app_secret):
     # Dropbox OAuth 2.0 token URL
     token_url = "https://api.dropbox.com/oauth2/token"
@@ -235,7 +222,6 @@ def get_access_token_from_refresh_token(refresh_token, app_key, app_secret):
     else:
         print("Failed to refresh access token:", response.json())
         return None
-    
 def download_file_from_dropbox(LOCAL_FILE_PATH,DROPBOX_FILE_PATH,new_access_token):
     try:
         # Connect to Dropbox
