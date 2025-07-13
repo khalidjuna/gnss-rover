@@ -1,6 +1,6 @@
      2.11           N: GPS NAV DATA                         RINEX VERSION / TYPE
 CONVBIN 2.4.2                           20250419 064306 UTC PGM / RUN BY / DATE 
-log: /home/ronny/gps-rover/output.ubx                       COMMENT             
+log: /home/ronny/gnss-rover/output.ubx                       COMMENT             
 format: u-blox                                              COMMENT             
                                                             END OF HEADER       
 30 25  4 19  6  0  0.0 -.166204292327E-03  .943600753089E-11  .000000000000E+00

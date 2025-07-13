@@ -15,29 +15,26 @@ import tkinter as tk
 from tkinter import font
 import time
 
-# Gunakan Access Token Dropbox yang sudah Anda miliki
-access_token = "sl.u.AF39ujNQ2-7XwQjo5VYQiVlC56i4urIO6iF0SQ3zQd7578Ub1cWz6SuXfGtN1DICaDQ4GE_18_J31pD4lT1h4UBsRlBu35mCeMrBqBMq1kwTS3NDyfZQ8c9Jyh7_itcoscskjNltwkY9xeeOSKt-wXVohLyXepryyPEmC9KFQvtDlRzeXyPd8AkdLdbIyUhr6u2ldPPEkIAI4xuhk19JlP1C4wGe9gh_Ew6WHPd9aQEqNEqmx_-ntEIvc3D0sxb0uFs0xqLy2COUl8iBdZeLXty--WFdbppcVMT9N6sUq3PHJ-YZB7lD4L9hIlBPsSbeNiJ56tJIEiaguiLUIIhgk1jV4jE7AyE2tohpy441U3FLGovwx3CTnvsi7NILfTeslXC0wWhJmNcK5irILuDcWH38udYiGGwSxCt0YP8XCFYXvOyTGZ9fbCcC3iwFGB5m2PvVaoCbSXwJxiVlgfAJrVEdEJXPJ0Q2dKTTRwDyEy-B-ofeNbv7clXZoj6ydRXZ9ntO4ROUV-UNEWWv6M1qoxHIGq0pCh_L_T7urd_UAZ1_KAi-w114VssWDL2SsdtP4kBeyDfDm88ubxBvUryZZZ7PD7K_4DmBhujTHyX_JxLi-_4yuwGiemkAMIv1ZKnMcCuaZG_5xLaAzfNpZrUUE4kaVOCQm0h8NNuRw4dhncmdWkTqpsqPzKUe1gMu-HBo12vc7OlLsCYj4MH5Gn3Gfxan6dRk5g8o5B4CpAnYDoUuWqGEMkhJIuf9nnRKzxVgqpKT4fhwVgumGbYzSbeqs2D4QDx3R10ZHBhm2XNIlDfOOUN_OKIyTzbXfB1k6wKGrJBFSD8fRB9aPF7RIwWHUXLfBCouB8JgJzn8YrmBzUJOyaFONplbqBxy1Sh9Qj1UFVap5vlwQvwPS94oaDLWFfRp03jEV_rD8SxHOx957TuXyUCPQ58puomuh_jYEBOl06wsK2G9wOcqY6LgfrDI4boGiPGX8eQ2tgaE2z-vntLfmJJC6RusenPHMeZRXdcRg4I1pGWM2SGQGLkhgIiOEVOf5sV0af6C4K8ZYJ4eGnFKcbW21dbFW657A3WLD_zG27e_hH1F0LpiKqpnD4YbWzQR2D-Ez7M3lm-U9XK0UYGAES4HiSWhECAYDYYCmpCPfq43xyBPiFKMBtpX4doC9qrO57UEXQbSuvXIaZxMmZoQToDWOSV0EpWC8LJwjks9PhhwOdr8jU5dD7zzfWMFUUhHFpNUGrt2LB2MlQ1JTFKYYLudWf1pnWqjD-ryHUF81UCIbHuO-SVX8XvCkkuAni_O5x-C04YlXBio3a-fePHEm9XJJP_NcSwoYzvYmfJff3lmFxQLIoXkHMjgF590qdk7VJr--fcXZPpAmZu6Rb7656MQ1N2AYRa66rrLawaqGjVmfLBQ4bmi0OeaSktFqqQt"
 
-#Cholid
-cred_ppls = credentials.Certificate('/home/ronny/asset/ppls-app.json')
-ppls_app = firebase_admin.initialize_app(cred_ppls, {
-    'databaseURL': 'https://ppls-app-default-rtdb.firebaseio.com/'  # Replace with your database URL    
+cred = credentials.Certificate('/home/ronny/asset/ppls-app.json')
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://ppls-app-default-rtdb.firebaseio.com/'  # Replace with your database URL
 })
-
+#PPLS
 # Configuration parameters
 device_port = "/dev/ttyGPS"  # Update this to the correct port for your ZED-F9P
 baud_rate = "115200"          # Default baud rate for ZED-F9P
-output_raw_file = "/home/ronny/gnss-rover/output.ubx"  # Temporary raw file
-output_rinex_file = "/home/ronny/gnss-rover/output.obs"    # Final RINEX observation file
-output_rinex_file_nav = "/home/ronny/gnss-rover/output.nav"    # Final RINEX observation file
-output_folder = "/home/ronny/gps-record"
+output_raw_file = "/home/ronny/gps-rover/output.ubx"  # Temporary raw file
+output_rinex_file = "/home/ronny/gps-rover/output.obs"    # Final RINEX observation file
+output_rinex_file_nav = "/home/ronny/gps-rover/output.nav"    # Final RINEX observation file
+rtkbin_path = "/path/to/rtklib/bin"  # Path to RTKLIB binaries (update this!)
 tcp_port = 9000
 # DROPBOX PARAMS
-auth_code = "tydj37Ufg54AAAAAAAAAf8-wu05VAM_49_4-jKINzi8"
-redirect_uri = "http://localhost:8081/"
-app_key = "2cjumlwvnf01wd7"
-app_secret = "i6nm76s8yy9tqrm"
-refresh_token = "aPyJmpqx6k4AAAAAAAAAATK0QfHt8jv1g6zHkW2F2vUkQ5DmTc2bZuGd4lZQ1hj"
+auth_code = "tydj37Ufg54AAAAAAAAAf8-wu05VAM_49_4-jKINzi8"       
+redirect_uri = "http://localhost:8080/"
+app_key = "aarre6i5rftqn5i"
+app_secret = "rpyy84iee1grtod"
+refresh_token = "aPyJmpqx6k4AAAAAAAAAAWDX6ZTPoe-vp65ZVp67ZQhX1fZA5wRaeRr3zK6sZOkV"
 
 str2str_command = [
         f"str2str",
@@ -47,7 +44,7 @@ str2str_command = [
     ]
 rtkrcv_command = [
     "rtkrcv",
-    "-o", "/home/ronny/gnss-rover/ntrip1.conf",  # Path to rtkrcv configuration
+    "-o", "/home/ronny/gps-rover/ntrip1.conf",  # Path to rtkrcv configuration
     "-s"                                       # Start immediately
 ]
 def send_ubx_message(ser, message):
@@ -98,7 +95,7 @@ def run_rtkrcv():
             print("Starting RTKRCV...")
             rtkrcv_command = [
                 "rtkrcv",
-                "-o", "/home/ronny/gnss-rover/ntrip1.conf",  
+                "-o", "/home/ronny/gps-rover/ntrip1.conf",  
                 "-s"                                       
             ]
             try:
@@ -120,11 +117,11 @@ def run_rnx2rtkp():
     
     rtkrcv_command = [
         "rnx2rtkp",
-        "/home/ronny/gnss-rover/output1.obs",
-        "/home/ronny/gnss-rover/base.obs",
-        "/home/ronny/gnss-rover/output1.nav",
-        "-k", "/home/ronny/gnss-rover/post.conf",
-        "-o", "/home/ronny/gnss-rover/solution_post.pos"  # Path to rtkrcv configuration
+        "/home/ronny/gps-rover/output1.obs",
+        "/home/ronny/gps-rover/base.obs",
+        "/home/ronny/gps-rover/output1.nav",
+        "-k", "/home/ronny/gps-rover/post.conf",
+        "-o", "/home/ronny/gps-rover/solution_post.pos"  # Path to rtkrcv configuration
     ]
     
     try:
@@ -245,7 +242,7 @@ def download_file_from_dropbox(LOCAL_FILE_PATH,DROPBOX_FILE_PATH,new_access_toke
     except Exception as e:
         print(f"An error occurred: {e}")
 def upload_data_post():
-    file_path = "/home/ronny/gnss-rover/solution_post.pos"
+    file_path = "/home/ronny/gps-rover/solution_post.pos"
     a = 6378137.0  # Earth's semi-major axis in meters (WGS84)
     e2 = 0.00669437999014  # Earth's first eccentricity squared (WGS84)
     try:
@@ -321,11 +318,11 @@ def upload_data_post():
         print(f"An error occurred: {e}")
 def start_rover():
     run_status = 0
-    local_file_path = "/home/ronny/gnss-rover/output.obs"
-    local_file_path_nav = "/home/ronny/gnss-rover/output.nav" # Path to your local .txt file
-    local_file_path_pos = "/home/ronny/gnss-rover/solution1.pos" # Path to your local .txt file
-    local_file_path_pos_post = "/home/ronny/gnss-rover/solution_post.pos" # Path to your local .txt file
-    local_file_path_base = "/home/ronny/gnss-rover/base.obs" # Path to your local .txt file
+    local_file_path = "/home/ronny/gps-rover/output.obs"
+    local_file_path_nav = "/home/ronny/gps-rover/output.nav" # Path to your local .txt file
+    local_file_path_pos = "/home/ronny/gps-rover/solution1.pos" # Path to your local .txt file
+    local_file_path_pos_post = "/home/ronny/gps-rover/solution_post.pos" # Path to your local .txt file
+    local_file_path_base = "/home/ronny/gps-rover/base.obs" # Path to your local .txt file
     ref_status = db.reference(f"/Realtime/rover/")
     ref = db.reference(f"/Realtime/base/")
     data = {
@@ -362,7 +359,7 @@ def start_rover():
             data = ref.child("rover").get()
             index = data['index']
             interval = data['Interval']
-            base_point = data['base']
+            
             tanggal = now.strftime("%d-%m-%Y")
             label = now.strftime("%d-%m-%Y_%H:%M")
             str1 = now.strftime("%d%m")
@@ -384,17 +381,17 @@ def start_rover():
             ref_status.update(data_status)
             convert_to_rinex()
             convert_to_rinex2()
-            shutil.copy("/home/ronny/gnss-rover/solution.pos","/home/ronny/gnss-rover/solution1.pos")
-            shutil.copy("/home/ronny/gnss-rover/output.obs","/home/ronny/gnss-rover/output1.obs")
-            shutil.copy("/home/ronny/gnss-rover/output.nav","/home/ronny/gnss-rover/output1.nav") 
-            shutil.copy("/home/ronny/gnss-rover/solution.pos",f"/home/ronny/gps-record/{filename_pos}")
-            shutil.copy("/home/ronny/gnss-rover/output.obs",f"/home/ronny/gps-record/{filename}")
-            shutil.copy("/home/ronny/gnss-rover/output.nav",f"/home/ronny/gps-record/{filename_nav}") 
+            shutil.copy("/home/ronny/gps-rover/solution.pos","/home/ronny/gps-rover/solution1.pos")
+            shutil.copy("/home/ronny/gps-rover/output.obs","/home/ronny/gps-rover/output1.obs")
+            shutil.copy("/home/ronny/gps-rover/output.nav","/home/ronny/gps-rover/output1.nav") 
+            shutil.copy("/home/ronny/gps-rover/solution.pos",f"/home/ronny/gps-record/{filename_pos}")
+            shutil.copy("/home/ronny/gps-rover/output.obs",f"/home/ronny/gps-record/{filename}")
+            shutil.copy("/home/ronny/gps-rover/output.nav",f"/home/ronny/gps-record/{filename_nav}") 
             data_status = {
                 f"status": "Uploading Result..."
             }
             ref_status.update(data_status)
-            new_access_token = access_token
+            new_access_token = get_access_token_from_refresh_token(refresh_token, app_key, app_secret)
             dropbox_destination_path = f'/GPS ZED-F9P/Rover/{filename}' 
             dropbox_destination_path_nav = f'/GPS ZED-F9P/Rover/{filename_nav}'
             dropbox_destination_path_pos = f'/GPS ZED-F9P/Rover/{filename_pos}'
@@ -402,19 +399,22 @@ def start_rover():
             upload_file_to_dropbox(local_file_path, dropbox_destination_path,new_access_token)
             upload_file_to_dropbox(local_file_path_nav, dropbox_destination_path_nav,new_access_token)
             upload_file_to_dropbox(local_file_path_pos, dropbox_destination_path_pos,new_access_token)
-            if(base_point==1):
-                ref = db.reference('Realtime',ppls_app)
-                data = ref.child("base").get()
-                dropbox_base_path = data['obs']
-            else:
-                ref = db.reference('Realtime')
-                data = ref.child("base").get()
-                dropbox_base_path = data['obs']
+            ref = db.reference('Realtime')
+            data = ref.child("base").get()
+            dropbox_base_path = data['obs']
             data_status = {
                 f"status": "Processing Result..."
             }
             ref_status.update(data_status)
             download_file_from_dropbox(local_file_path_base,dropbox_base_path,new_access_token)
+            # ref = db.reference(f"/Patok/{index}/Storage")
+            # data = {
+            #     "obs": {f"{label}":dropbox_destination_path},
+            #     "nav": {f"{label}":dropbox_destination_path_nav},
+            #     "pos": {f"{label}":dropbox_destination_path_pos},
+            #     "pos_post": {f"{label}":dropbox_destination_path_post}
+            # }
+            # ref.update(data)
             ref = db.reference(f"/Patok/{index}/Storage/obs")
             data = {
                 f"{label}": dropbox_destination_path
@@ -472,7 +472,7 @@ def read_last_line(file_path):
         last_line = file.readline().decode()
     return last_line.strip()
 def start_realtime():
-    file_path = "/home/ronny/gnss-rover/solution.pos"
+    file_path = "/home/ronny/gps-rover/solution.pos"
     a = 6378137.0  # Earth's semi-major axis in meters (WGS84)
     e2 = 0.00669437999014  # Earth's first eccentricity squared (WGS84)
     startup_flag = 0
@@ -596,7 +596,7 @@ def start_gui():
             time.sleep(1)
     # Initialize the main tkinter window
     root = tk.Tk()
-    root.title("ROVER2 GPS-PPLS")
+    root.title("ROVER GPS-PPLS")
     root.geometry("480x320")  # Set resolution to match the 3.5" LCD
     root.configure(bg="black")  # Optional background color
 
@@ -651,6 +651,11 @@ if __name__ == "__main__":
             rinex_thread.join()
             rtkrcv_thread.join()
             time.sleep(5)
-        except Exception as e:
-            print(e)
+        except KeyboardInterrupt:
+            print("KeyboardInterrupt detected. Exiting...")
             break
+        except Exception as e:
+            print("Exception occurred:", e)
+            print("Trying to restarting system")
+            time.sleep(2)
+            
